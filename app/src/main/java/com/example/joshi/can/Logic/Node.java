@@ -26,7 +26,7 @@ public class Node {
     }
 
 
-    private double hashX(String ip) {
+    public double hashX(String ip) {
         double x = ip.hashCode();
         if(x < 0){
             x = x/(-2552552552l);
@@ -39,7 +39,7 @@ public class Node {
 
 
 
-    private double hashY(String ip){
+    public double hashY(String ip){
         String hash2 = umkehren(ip);
         double y = hash2.hashCode();
         if(y < 0){
@@ -62,7 +62,7 @@ public class Node {
         return umgekehrt;
     }
 
-    public boolean checkIfInMyZone(int x, int y) {
+    public boolean checkIfInMyZone(double x, double y) {
         if(x > topLeftCorner.getX() && x <= topRightCorner.getX())
         {
             if (y > bottomLeftCorner.getY() && y <= topLeftCorner.getY() ) {

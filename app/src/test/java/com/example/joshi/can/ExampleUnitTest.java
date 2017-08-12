@@ -27,10 +27,10 @@ public class ExampleUnitTest {
     {
         Node node = new Node();
         try {
-            Corner bottomLeftCorner = new Corner(3, 5);
-            Corner bottomRightCorner= new Corner(6, 5);
-            Corner topLeftCorner    = new Corner(3, 10);
-            Corner topRightCorner   = new Corner(6, 10);
+            Corner bottomLeftCorner = new Corner(0.3, 0.1);
+            Corner bottomRightCorner= new Corner(0.6, 0.1);
+            Corner topLeftCorner    = new Corner(0.3, 0.9);
+            Corner topRightCorner   = new Corner(0.6, 0.9);
             node.setBottomLeftCorner(bottomLeftCorner);
             node.setBottomRightCorner(bottomRightCorner);
             node.setTopLeftCorner(topLeftCorner);
@@ -42,20 +42,24 @@ public class ExampleUnitTest {
         {
 
         }
-        assertEquals(true, node.checkIfInMyZone(4,6));
-        assertEquals(true, node.checkIfInMyZone(6,6));
-        assertEquals(true, node.checkIfInMyZone(5,9));
-        assertEquals(true, node.checkIfInMyZone(6,10));
+        System.out.print(node.hashX("192.111.23.4") + ", " + node.hashY("192.111.23.4") + "\n");
+        System.out.print(node.hashX("255.255.255.255") + ", " + node.hashY("255.255.255.255") + "\n");
+        System.out.print(node.hashX("0.0.0.0") + ", " + node.hashY("0.0.0.0") + "\n");
+        System.out.print(node.hashX("78.31.3.129") + ", " + node.hashY("78.31.3.129") + "\n");
+        assertEquals(true, node.checkIfInMyZone(node.hashX("192.111.23.4"), node.hashY("192.111.23.4")));
+        assertEquals(true, node.checkIfInMyZone(node.hashX("255.255.255.255"), node.hashY("255.255.255.255")));
+        assertEquals(true, node.checkIfInMyZone(node.hashX("0.0.0.0"), node.hashY("0.0.0.0")));
+        assertEquals(true, node.checkIfInMyZone(node.hashX("78.31.3.129"), node.hashY("78.31.3.129")));
     }
     @Test
     public void test_Node_checkIfInMyZone_False()
     {
         Node node = new Node();
         try {
-            Corner bottomLeftCorner = new Corner(3, 5);
-            Corner bottomRightCorner= new Corner(6, 5);
-            Corner topLeftCorner    = new Corner(3, 10);
-            Corner topRightCorner   = new Corner(6, 10);
+            Corner bottomLeftCorner = new Corner(0.6, 0.4);
+            Corner bottomRightCorner= new Corner(0.9, 0.4);
+            Corner topLeftCorner    = new Corner(0.6, 0.9);
+            Corner topRightCorner   = new Corner(0.9, 0.9);
             node.setBottomLeftCorner(bottomLeftCorner);
             node.setBottomRightCorner(bottomRightCorner);
             node.setTopLeftCorner(topLeftCorner);
@@ -67,8 +71,13 @@ public class ExampleUnitTest {
         {
 
         }
-        assertEquals(false, node.checkIfInMyZone(3,10));
-        assertEquals(false, node.checkIfInMyZone(6,5));
-        assertEquals(false, node.checkIfInMyZone(3,5));
+        System.out.print(node.hashX("192.111.23.4") + ", " + node.hashY("192.111.23.4") + "\n");
+        System.out.print(node.hashX("255.255.255.255") + ", " + node.hashY("255.255.255.255") + "\n");
+        System.out.print(node.hashX("0.0.0.0") + ", " + node.hashY("0.0.0.0") + "\n");
+        System.out.print(node.hashX("78.31.3.129") + ", " + node.hashY("78.31.3.129") + "\n");
+        assertEquals(false, node.checkIfInMyZone(node.hashX("192.111.23.4"), node.hashY("192.111.23.4")));
+        assertEquals(false, node.checkIfInMyZone(node.hashX("255.255.255.255"), node.hashY("255.255.255.255")));
+        assertEquals(false, node.checkIfInMyZone(node.hashX("0.0.0.0"), node.hashY("0.0.0.0")));
+        assertEquals(false, node.checkIfInMyZone(node.hashX("78.31.3.129"), node.hashY("78.31.3.129")));
     }
 }
