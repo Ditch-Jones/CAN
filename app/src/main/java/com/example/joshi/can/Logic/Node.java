@@ -37,6 +37,8 @@ public class Node {
         }
     }
 
+
+    
     private double hashY(String ip){
         String hash2 = umkehren(ip);
         double y = hash2.hashCode();
