@@ -62,6 +62,16 @@ public class Node {
         return umgekehrt;
     }
 
+    public boolean checkIfInMyZone(int x, int y) {
+        if(x > topLeftCorner.getX() && x <= topRightCorner.getX())
+        {
+            if (y > bottomLeftCorner.getY() && y <= topLeftCorner.getY() ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void increasePeersCount(){
         if(checkIfMaxPeersCount()){
 
