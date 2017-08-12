@@ -12,6 +12,10 @@ public class Node {
     private User user;
     private final static int maxPeers = 4;
     private int peersCount;
+    private Node neighbourOne;
+    private Node neighbourTwo;
+    private Node neighbourThree;
+    private Node neighbourFour;
 
     public Node() {
 
@@ -19,6 +23,41 @@ public class Node {
 
     public Node (Corner topLeftCorner, Corner topRightCorner, Corner bottomLeftCorner, Corner bottomRightCorner, User user, int peersCount) {
 
+    }
+
+
+    private double hashX(String ip) {
+        double x = ip.hashCode();
+        if(x < 0){
+            x = x/(-2552552552l);
+            return x;
+        }else{
+            x = x/2552552552l;
+            return x;
+        }
+    }
+
+    private double hashY(String ip){
+        String hash2 = umkehren(ip);
+        double y = hash2.hashCode();
+        if(y < 0){
+            y = y/(-2552552552l);
+            return y;
+        }else{
+            y = y/2552552552l;
+            return y;
+        }
+    }
+
+
+    public static String umkehren( String str )
+    {
+        String umgekehrt = new String();
+
+        for ( int j = str.length()-1; j >= 0; j-- )
+            umgekehrt += str.charAt(j);
+
+        return umgekehrt;
     }
 
     public void increasePeersCount(){
@@ -96,4 +135,36 @@ public class Node {
         return user;
     }
 
+    public Node getNeighbourFour() {
+        return neighbourFour;
+    }
+
+    public Node getNeighbourOne() {
+        return neighbourOne;
+    }
+
+    public Node getNeighbourThree() {
+        return neighbourThree;
+    }
+
+    public Node getNeighbourTwo() {
+        return neighbourTwo;
+    }
+
+
+    public void setNeighbourFour(Node neighbourFour) {
+        this.neighbourFour = neighbourFour;
+    }
+
+    public void setNeighbourOne(Node neighbourOne) {
+        this.neighbourOne = neighbourOne;
+    }
+
+    public void setNeighbourThree(Node neighbourThree) {
+        this.neighbourThree = neighbourThree;
+    }
+
+    public void setNeighbourTwo(Node neighbourTwo) {
+        this.neighbourTwo = neighbourTwo;
+    }
 }
