@@ -16,7 +16,7 @@ public class Node {
     private Node neighbourTwo;
     private Node neighbourThree;
     private Node neighbourFour;
-    private User user2;
+    
     public Node() {
 
     }
