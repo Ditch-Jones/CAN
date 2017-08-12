@@ -16,7 +16,7 @@ public class Node {
     private Node neighbourTwo;
     private Node neighbourThree;
     private Node neighbourFour;
-
+    private User user2;
     public Node() {
 
     }
@@ -38,7 +38,7 @@ public class Node {
     }
 
 
-    
+
     private double hashY(String ip){
         String hash2 = umkehren(ip);
         double y = hash2.hashCode();
