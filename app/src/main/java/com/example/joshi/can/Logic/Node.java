@@ -22,7 +22,12 @@ public class Node {
     }
 
     public Node (Corner topLeftCorner, Corner topRightCorner, Corner bottomLeftCorner, Corner bottomRightCorner, User user, int peersCount) {
-
+        this.topLeftCorner = topLeftCorner;
+        this.bottomLeftCorner = bottomLeftCorner;
+        this.topRightCorner = topRightCorner;
+        this.bottomRightCorner = bottomRightCorner;
+        this.user = user;
+        this.peersCount = peersCount;
     }
 
 
