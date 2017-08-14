@@ -5,29 +5,28 @@ package com.example.joshi.can.Logic;
  */
 
 public class Node {
+    private double ownX;
+    private double ownY;
     private Corner topLeftCorner;
     private Corner topRightCorner;
     private Corner bottomLeftCorner;
     private Corner bottomRightCorner;
     private User user;
-    private final static int maxPeers = 4;
+    private final static int maxPeers = 3;
     private int peersCount;
-    private Node neighbourOne;
-    private Node neighbourTwo;
-    private Node neighbourThree;
-    private Node neighbourFour;
+    private Node neighbour;
     
     public Node() {
 
     }
 
     public Node (Corner topLeftCorner, Corner topRightCorner, Corner bottomLeftCorner, Corner bottomRightCorner, User user, int peersCount) {
-        this.topLeftCorner = topLeftCorner;
-        this.bottomLeftCorner = bottomLeftCorner;
-        this.topRightCorner = topRightCorner;
-        this.bottomRightCorner = bottomRightCorner;
-        this.user = user;
-        this.peersCount = peersCount;
+        this.topLeftCorner       = topLeftCorner;
+        this.bottomLeftCorner    = bottomLeftCorner;
+        this.topRightCorner      = topRightCorner;
+        this.bottomRightCorner   = bottomRightCorner;
+        this.user                = user;
+        this.peersCount          = peersCount;
     }
 
 
@@ -41,7 +40,6 @@ public class Node {
             return x;
         }
     }
-
 
 
     public double hashY(String ip){
@@ -77,6 +75,70 @@ public class Node {
         return false;
     }
 
+    /**
+     * Routing-Methode
+     * @param ip IP des zu routenden Knoten
+     * @param x x
+     * @param y
+     */
+    private void routing(String ip, double x, double y) {
+        double neighbourX, neighbourY, disOne, disTwo, disThree, disFour;
+        Node tempNeighbour;
+        double [] distances = new double[3];
+        if(checkIfInMyZone(x,y)){
+            //// TODO: 14.08.2017  Reply to Request-Method(muss setPeers und setNeighbours mitsenden)
+            //// TODO: 14.08.2017 Muss aktuelle Peers über den neuen Knoten Informieren(wenn diese Nachricht geschickt wird muss auch hier klar sein das gesplittet wird(für die peers)
+            //// , update eigene Peerslist(Db)
+            if(getPeersCount() == maxPeers){
+                //// TODO: 14.08.2017 SPLITT
+            }
+        }
+        for(int i=0; i<=3 ; i++){
+            // gibt getNeighbour ein Objekt wieder?
+            if(getNeighbour(i) != null){
+                neighbour = getNeighbour(i);
+
+                neighbourX = neighbour.getOwnX();
+                neighbourY = neighbour.getOwnY();
+
+                distances[i] = computeDistance(x,y,neighbourX,neighbourY);
+            }
+        }
+
+        int index = compareValues(distances);
+        //// TODO: 14.08.2017 Verbindungsaufbau zu dem Neighbour der an Stelle == Index steht und IP und x,y-Werte übertragen so das dieser weiter routen kann
+    }
+
+    /**
+        Diese Methode berechnet die Distanz zwischen den zu Routenden Knoten und den Neighbours des aktuellen Knotens(der routet)
+     */
+    private double computeDistance(double x, double y, double neighbourX, double neighbourY) {
+        double dis = Math.abs(x - neighbourX) + Math.abs(y - neighbourY);
+        return dis;
+    }
+
+    private void informPeersAboutYourself(String ip) {
+        //// TODO: 14.08.2017    user.getUid(); von DB, user.getIP von DB
+        //// TODO: 14.08.2017 sende an alle deine Peers ein setPeer mit diesen Informationen
+
+    }
+    /**
+     * Vergleiche alle Distanzen der Nachbarn
+     * @param distances Array mit allen Distanzes der Neighbour zu dem zu routenden Knoten
+     * @return den index(Neighbour) mit der geringsten Distanz
+     */
+    private int compareValues(double [] distances){
+        int index = 0;
+        double temp =  distances[0];
+        for(int i= 1 ; i< distances.length; i++){
+            if(temp > distances[i]){
+                temp = distances[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
     public void increasePeersCount(){
         if(checkIfMaxPeersCount()){
 
@@ -93,12 +155,40 @@ public class Node {
     }
 
     private boolean checkIfMaxPeersCount(){
-        if (peersCount == 4){
+        if (peersCount == maxPeers){
             return true;
         }else{
             return false;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //getter and setter
     public void setBottomLeftCorner(Corner bottomLeftCorner) {
         this.bottomLeftCorner = bottomLeftCorner;
@@ -136,15 +226,18 @@ public class Node {
         return topRightCorner;
     }
 
-    public Corner getTopLeftCorner() {
+    public Corner getTopLeftCorner()
+    {
         return topLeftCorner;
     }
 
     public static int getMaxPeers() {
+
         return maxPeers;
     }
 
     public int getPeersCount() {
+
         return peersCount;
     }
 
@@ -152,36 +245,29 @@ public class Node {
         return user;
     }
 
-    public Node getNeighbourFour() {
-        return neighbourFour;
+    public Node getNeighbour(int i) {
+        return neighbour;
     }
 
-    public Node getNeighbourOne() {
-        return neighbourOne;
-    }
-
-    public Node getNeighbourThree() {
-        return neighbourThree;
-    }
-
-    public Node getNeighbourTwo() {
-        return neighbourTwo;
+    public void setNeighbour(Node neighbour) {
+        this.neighbour = neighbour;
     }
 
 
-    public void setNeighbourFour(Node neighbourFour) {
-        this.neighbourFour = neighbourFour;
+
+    public double getOwnX() {
+        return ownX;
     }
 
-    public void setNeighbourOne(Node neighbourOne) {
-        this.neighbourOne = neighbourOne;
+    public double getOwnY() {
+        return ownY;
     }
 
-    public void setNeighbourThree(Node neighbourThree) {
-        this.neighbourThree = neighbourThree;
+    public void setOwnX(double ownX) {
+        this.ownX = ownX;
     }
 
-    public void setNeighbourTwo(Node neighbourTwo) {
-        this.neighbourTwo = neighbourTwo;
+    public void setOwnY(double ownY) {
+        this.ownY = ownY;
     }
 }
