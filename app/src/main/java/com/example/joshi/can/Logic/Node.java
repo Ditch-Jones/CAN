@@ -43,10 +43,10 @@ public class Node {
     public double hashX(String ip) {
         double x = ip.hashCode();
         if(x < 0){
-            x = x/(-255255255255l);
+            x = x/(-2552552552l);
             return x;
         }else{
-            x = x/255255255255l;
+            x = x/2552552552l;
             return x;
         }
     }
@@ -56,10 +56,10 @@ public class Node {
         String hash2 = umkehren(ip);
         double y = hash2.hashCode();
         if(y < 0){
-            y = y/(-255255255255l);
+            y = y/(-2552552552l);
             return y;
         }else{
-            y = y/255255255255l;
+            y = y/2552552552l;
             return y;
         }
     }

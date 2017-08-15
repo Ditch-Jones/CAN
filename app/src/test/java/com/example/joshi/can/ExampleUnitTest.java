@@ -81,9 +81,4 @@ public class ExampleUnitTest {
         assertEquals(false, node.checkIfInMyZone(node.hashX("78.31.3.129"), node.hashY("78.31.3.129")));
     }
 
-    @Test
-    public void test_hash(){
-        Node node = new Node();
-        System.out.println("hashwert newHash " + node.hash());
-    }
 }
