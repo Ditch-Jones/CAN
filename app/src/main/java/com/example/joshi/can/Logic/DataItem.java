@@ -18,7 +18,7 @@ import com.example.joshi.can.Exception.YMustBeLargerThanZeroException;
 
 public class DataItem {
     private int picID;
-    private int ownerID;
+
     private int x;
     private int y;
 
@@ -30,8 +30,6 @@ public class DataItem {
             XMustBeLargerThanZeroException, YMustBeLargerThanZeroException {
         if (picID < 0) {
             throw new PicIdMustBeLargerThanZeroException("Picture ID has to be larger than Zero");
-        } else if (ownerID < 0) {
-            throw new OwnerIdMustBeLargerThanZeroException("Owner ID has to be larger than Zero");
         } else if (x < 0) {
             throw new XMustBeLargerThanZeroException("X has to be larger than Zero");
         } else if (y < 0) {
@@ -39,7 +37,6 @@ public class DataItem {
         } else {
             this.x          = x;
             this.y          = y;
-            this.ownerID    = ownerID;
             this.picID      = picID;
         }
 
@@ -53,9 +50,6 @@ public class DataItem {
         return picID;
     }
 
-    public int getOwnerID() {
-        return ownerID;
-    }
 
     public int getX() {
         return x;
@@ -63,10 +57,6 @@ public class DataItem {
 
     public int getY() {
         return y;
-    }
-
-    public void setOwnerID(int ownerID) {
-        this.ownerID = ownerID;
     }
 
     public void setPicID(int picID) {

@@ -1,5 +1,6 @@
 package com.example.joshi.can.Logic;
 
+import java.lang.*;
 /**
  * Created by Joshi on 11.08.2017.
  */
@@ -78,21 +79,31 @@ public class Node {
     /**
      * Routing-Methode
      * @param ip IP des zu routenden Knoten
-     * @param x x
+     * @param x
      * @param y
      */
-    private void routing(String ip, double x, double y) {
-        double neighbourX, neighbourY, disOne, disTwo, disThree, disFour;
-        Node tempNeighbour;
-        double [] distances = new double[3];
+    private void receiveRoutingRequest(String ip, double x, double y, int id, boolean isNode) {
         if(checkIfInMyZone(x,y)){
-            //// TODO: 14.08.2017  Reply to Request-Method(muss setPeers und setNeighbours mitsenden)
-            //// TODO: 14.08.2017 Muss aktuelle Peers über den neuen Knoten Informieren(wenn diese Nachricht geschickt wird muss auch hier klar sein das gesplittet wird(für die peers)
-            //// , update eigene Peerslist(Db)
-            if(getPeersCount() == maxPeers){
-                //// TODO: 14.08.2017 SPLITT
+            if(isNode){
+                //// TODO: 14.08.2017  Reply to Request-Method(muss setPeers(mit sich selbst) und setNeighbours mitsenden)
+                //// TODO: 14.08.2017 Muss aktuelle Peers über den neuen Knoten Informieren, sodass diese ihre Peerliste updaten. Nun update deine eigene Peerlist
+                if(getPeersCount() == maxPeers){
+                    //// TODO: 15.08.2017 informiere deine Peers das sie nun Splitten müssen// methode die einen Splitt aufruft
+                    //// TODO: 14.08.2017 SPLITT
+                }
+            }else {
+                //// TODO: 15.08.2017 Verbindungsaufbau zu der ip um Bild herunterzuladen und dann zu speichern
+                /// TODO: 15.08.2017 verbindungsaufbau zu Peers und diesen werden die Informationen zum Bild übermittelt und nun laden sie sich das Bild von zuletzt gerouteten Node herunter
             }
         }
+        //fortsetzung des routing
+        routing(ip,x,y,id,isNode);
+    }
+
+    private void routing(String ip, double x ,double y, int id, boolean isNode){
+        double neighbourX, neighbourY;
+        double [] distances = new double[3];
+
         for(int i=0; i<=3 ; i++){
             // gibt getNeighbour ein Objekt wieder?
             if(getNeighbour(i) != null){
@@ -104,11 +115,17 @@ public class Node {
                 distances[i] = computeDistance(x,y,neighbourX,neighbourY);
             }
         }
-
         int index = compareValues(distances);
         //// TODO: 14.08.2017 Verbindungsaufbau zu dem Neighbour der an Stelle == Index steht und IP und x,y-Werte übertragen so das dieser weiter routen kann
     }
 
+
+    private void delPicInCan(int id, double x, double y){
+        // TODO: 15.08.2017 Erst muss delPicInCan aufgerufen werden bevor das Bild auf dem eigenen Gerät gelöscht wird
+        // TODO: 15.08.2017 checke deinen foreignData Table um zu sehen ob die id,x und y übereinstimmen, Falls dies der Fall ist lösche das Bild
+        // TODO: 15.08.2017  
+        // benötigen die Methoden getID, getX und getY auf den foreignDataTable, @somar wie löscht man ein Bild auf dem Gerät
+    }
     /**
         Diese Methode berechnet die Distanz zwischen den zu Routenden Knoten und den Neighbours des aktuellen Knotens(der routet)
      */
@@ -124,7 +141,7 @@ public class Node {
     }
     /**
      * Vergleiche alle Distanzen der Nachbarn
-     * @param distances Array mit allen Distanzes der Neighbour zu dem zu routenden Knoten
+     * @param distances Array mit allen Distanzen der Neighbour zu dem zu routenden Knoten
      * @return den index(Neighbour) mit der geringsten Distanz
      */
     private int compareValues(double [] distances){
@@ -137,6 +154,20 @@ public class Node {
             }
         }
         return index;
+    }
+
+
+
+
+
+    private void requestJoin(){
+        //// TODO: 15.08.2017 getBootsTrapIP() Method
+        //// TODO: 15.08.2017 nun Verbindung zu dieser IP herstellen und routing-Anfrage mit(eigener IP und x ,y Werten als Parameter) 
+    }
+
+    private void replyToRequest(String ip){
+        //// TODO: 15.08.2017 Verbindung zu IP herstellen, und setPeer und setNeighbour aufrufen auf diesem Knoten(mit den eigenen Peers und Neighbour-Werten) 
+        //// TODO: 15.08.2017 nach update der eigenen PeersDB muss überprüft werden ob die Anzahl Peers nun 3 beträgt, falls dies der Fall ist => Split 
     }
 
     public void increasePeersCount(){
@@ -163,9 +194,24 @@ public class Node {
     }
 
 
+    public double hash(int key){
+        key += (key << 12);
+        key ^= (key >> 22);
+        key += (key << 4);
+        key ^= (key >> 9);
+        key += (key << 10);
+        key ^= (key >> 2);
+        key += (key << 7);
+        key ^= (key >> 12);
+        return key / 2147483647.5 - 1;
+    }
 
 
+    public int stringToInt (String ip){
+        ip = ip.replaceAll(".","");
+        int key = Integer.parse
 
+    }
 
 
 
