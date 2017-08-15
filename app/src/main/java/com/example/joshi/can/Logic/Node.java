@@ -316,4 +316,10 @@ public class Node {
     public void setOwnY(double ownY) {
         this.ownY = ownY;
     }
+
+    public String toString()
+    {
+        String test = "";
+       return  test;
+    }
 }
