@@ -76,4 +76,8 @@ public class Client {
         s.close();
 
     }
+
+    public void sendString(String ip, String ipAdr) throws IOException {
+        sendIPAddress(ip,ipAdr);
+    }
 }

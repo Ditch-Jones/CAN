@@ -143,16 +143,8 @@ public class ExampleUnitTest {
     public void testSendIPAddress() throws IOException {
         Client client = new Client();
         try{
-            ServerSocket ss = new ServerSocket(9999);
-
-            Socket s = ss.accept();
             client.sendString("127.0.0.1","192.168.9.119");
-            BufferedReader br = new BufferedReader (new InputStreamReader(s.getInputStream()));
-            String str = br.readLine();
 
-            System.out.println("Client Data: " + str);
-
-            ss.close();
         }catch(UnknownHostException e){
             e.printStackTrace();
         }catch (IOException e){
@@ -160,6 +152,23 @@ public class ExampleUnitTest {
         }
     }
 
+    @Test
+    public void receiveServer() throws IOException {
+        try{
+            ServerSocket ss = new ServerSocket(9999);
+
+            Socket s = ss.accept();
+            BufferedReader br = new BufferedReader (new InputStreamReader(s.getInputStream()));
+            String str = br.readLine();
+
+            System.out.println("Client Data: " + str);
+
+            ss.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
 
 
