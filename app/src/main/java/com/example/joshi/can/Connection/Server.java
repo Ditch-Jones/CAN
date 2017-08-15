@@ -1,8 +1,5 @@
 package com.example.joshi.can.Connection;
 
-/**
- * Created by Joshi on 15.08.2017.
- */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;

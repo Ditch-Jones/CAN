@@ -1,9 +1,5 @@
 package com.example.joshi.can.Connection;
 
-/**
- * Created by Joshi on 15.08.2017.
- */
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -16,22 +12,22 @@ public class Client {
 
     /**
      * Main Methode zum Testen der einzelnen Methoden
-     * <p>
+     *
      * Uebergabe-Werte bitte hier in Konstruktoren geben
      */
 
     protected static final int portNr = 9999;
 
-    public static void main(String args[]) throws NoSuchElementException {
+    public static void main (String args[])throws NoSuchElementException{
         Client client = new Client();
 
-        try {
+        try{
             client.sendIPAddress("192.168.2.110", "Dooooo Hont!");
             // client.sendXCoordinate("192.168.2.110", 0.213);
 
-        } catch (UnknownHostException e) {
+        }catch (UnknownHostException e){
             e.printStackTrace();
-        } catch (IOException e) {
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -39,13 +35,14 @@ public class Client {
     /**
      * Methode zum Senden einer IP-Adresse als String
      *
-     * @param ip    = IP des ServerSocket
+     * @param ip = IP des ServerSocket
      * @param ipAdr = IP-Adresse als String
+     *
      * @throws UnknownHostException
      * @throws IOException
      */
 
-    private void sendIPAddress(String ip, String ipAdr) throws UnknownHostException, IOException {
+    private void sendIPAddress(String ip, String ipAdr) throws UnknownHostException, IOException{
 
         Socket s = new Socket(ip, portNr);
 
@@ -68,7 +65,7 @@ public class Client {
      * @throws IOException
      */
 
-    private void sendXCoordinate(String ip, double x) throws UnknownHostException, IOException {
+    private void sendXCoordinate(String ip, double x) throws UnknownHostException, IOException{
 
         Socket s = new Socket(ip, portNr);
 
@@ -80,5 +77,3 @@ public class Client {
 
     }
 }
-
-

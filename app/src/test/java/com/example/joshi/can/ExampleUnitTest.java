@@ -1,5 +1,6 @@
 package com.example.joshi.can;
 
+import com.example.joshi.can.Connection.Client;
 import com.example.joshi.can.Exception.XMustBeLargerThanZeroException;
 import com.example.joshi.can.Exception.YMustBeLargerThanZeroException;
 import com.example.joshi.can.Logic.Corner;
@@ -7,6 +8,13 @@ import com.example.joshi.can.Logic.Node;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import static org.junit.Assert.*;
 
@@ -131,6 +139,26 @@ public class ExampleUnitTest {
         assertEquals(1, node.compareValues(dis));
     }
 
+    @Test
+    public void testSendIPAddress() throws IOException {
+        Client client = new Client();
+        try{
+            ServerSocket ss = new ServerSocket(9999);
+
+            Socket s = ss.accept();
+            client.sendString("127.0.0.1","192.168.9.119");
+            BufferedReader br = new BufferedReader (new InputStreamReader(s.getInputStream()));
+            String str = br.readLine();
+
+            System.out.println("Client Data: " + str);
+
+            ss.close();
+        }catch(UnknownHostException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
 
 
