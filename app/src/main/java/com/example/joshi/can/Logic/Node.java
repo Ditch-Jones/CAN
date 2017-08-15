@@ -21,6 +21,15 @@ public class Node {
 
     }
 
+    /**
+     *
+     * @param topLeftCorner
+     * @param topRightCorner
+     * @param bottomLeftCorner
+     * @param bottomRightCorner
+     * @param user hat ID und IP
+     * @param peersCount
+     */
     public Node (Corner topLeftCorner, Corner topRightCorner, Corner bottomLeftCorner, Corner bottomRightCorner, User user, int peersCount) {
         this.topLeftCorner       = topLeftCorner;
         this.bottomLeftCorner    = bottomLeftCorner;
@@ -34,10 +43,10 @@ public class Node {
     public double hashX(String ip) {
         double x = ip.hashCode();
         if(x < 0){
-            x = x/(-2552552552l);
+            x = x/(-255255255255l);
             return x;
         }else{
-            x = x/2552552552l;
+            x = x/255255255255l;
             return x;
         }
     }
@@ -47,10 +56,10 @@ public class Node {
         String hash2 = umkehren(ip);
         double y = hash2.hashCode();
         if(y < 0){
-            y = y/(-2552552552l);
+            y = y/(-255255255255l);
             return y;
         }else{
-            y = y/2552552552l;
+            y = y/255255255255l;
             return y;
         }
     }
@@ -194,24 +203,7 @@ public class Node {
     }
 
 
-    public double hash(int key){
-        key += (key << 12);
-        key ^= (key >> 22);
-        key += (key << 4);
-        key ^= (key >> 9);
-        key += (key << 10);
-        key ^= (key >> 2);
-        key += (key << 7);
-        key ^= (key >> 12);
-        return key / 2147483647.5 - 1;
-    }
 
-
-    public int stringToInt (String ip){
-        ip = ip.replaceAll(".","");
-        int key = Integer.parse
-
-    }
 
 
 
@@ -317,9 +309,5 @@ public class Node {
         this.ownY = ownY;
     }
 
-    public String toString()
-    {
-        String test = "";
-       return  test;
-    }
+
 }
