@@ -18,6 +18,7 @@ public class Node {
     private final static int maxPeers = 3;
     private int peersCount;
     private Node neighbour;
+    private double rtt = 0;
 
     /**
      * Standardkonstruktor für Node
@@ -365,5 +366,15 @@ public class Node {
         this.ownY = ownY;
     }
 
+    public double getRtt() {
+        return rtt;
+    }
 
+    public void setRtt(double rtt) {
+        this.rtt = rtt;
+    }
+
+    public Node getNeighbour() {
+        return neighbour;
+    }
 }
