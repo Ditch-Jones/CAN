@@ -112,7 +112,7 @@ public class Node {
 
     private void routing(String ip, double x ,double y, int id, boolean isNode){
         double neighbourX, neighbourY;
-        double [] distances = new double[3];
+        double [] distances = new double[4];
 
         for(int i=0; i<=3 ; i++){
             // gibt getNeighbour ein Objekt wieder?
@@ -139,7 +139,7 @@ public class Node {
     /**
         Diese Methode berechnet die Distanz zwischen den zu Routenden Knoten und den Neighbours des aktuellen Knotens(der routet)
      */
-    private double computeDistance(double x, double y, double neighbourX, double neighbourY) {
+    public double computeDistance(double x, double y, double neighbourX, double neighbourY) {
         double dis = Math.abs(x - neighbourX) + Math.abs(y - neighbourY);
         return dis;
     }
@@ -154,11 +154,12 @@ public class Node {
      * @param distances Array mit allen Distanzen der Neighbour zu dem zu routenden Knoten
      * @return den index(Neighbour) mit der geringsten Distanz
      */
-    private int compareValues(double [] distances){
+    public int compareValues(double [] distances){
         int index = 0;
         double temp =  distances[0];
         for(int i= 1 ; i< distances.length; i++){
             if(temp > distances[i]){
+
                 temp = distances[i];
                 index = i;
             }

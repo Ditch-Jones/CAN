@@ -94,4 +94,40 @@ public class ExampleUnitTest {
         assertEquals(false, node.checkIfInMyZone(node.hashX("78.31.3.129"), node.hashY("78.31.3.129")));
     }
 
+    @Test
+    public void test_ComputeDistance()
+    {
+        Node node = new Node();
+        double x = node.hashX("192.111.23.4");
+        double y = node.hashY("192.111.23.4");
+        System.out.println(node.computeDistance(node.hashX("12.191.25.255"),node.hashY("12.191.25.255") ,node.hashX("12.191.10.255"),node.hashY("12.191.10.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.9.255"),node.hashY("12.191.9.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("1.1.1.100"),node.hashY("1.1.1.100")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.10.255"),node.hashY("12.191.10.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.11.255"),node.hashY("12.191.11.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.12.255"),node.hashY("12.191.12.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.13.255"),node.hashY("12.191.13.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("0.0.0.0"),node.hashY("0.0.0.0")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("255.255.255.255"),node.hashY("255.255.255.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("78.31.3.129"),node.hashY("78.31.3.129")));
+    }
+
+    @Test
+    public void test_CompareValues()
+    {
+        Node node = new Node();
+        double x = node.hashX("192.111.23.4");
+        double y = node.hashY("192.111.23.4");
+        double dis[] = new double[4];
+        dis [0] = node.computeDistance(x ,y ,node.hashX("12.191.10.255"),node.hashY("12.191.10.255"));
+        dis [1] = node.computeDistance(x ,y ,node.hashX("12.191.11.255"),node.hashY("12.191.11.255"));
+        dis [2] = node.computeDistance(x ,y ,node.hashX("12.191.12.255"),node.hashY("12.191.12.255"));
+        dis [3] = node.computeDistance(x ,y ,node.hashX("12.191.13.255"),node.hashY("12.191.13.255"));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.10.255"),node.hashY("12.191.10.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.11.255"),node.hashY("12.191.11.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.12.255"),node.hashY("12.191.12.255")));
+        System.out.println(node.computeDistance(x ,y ,node.hashX("12.191.13.255"),node.hashY("12.191.13.255")));
+        System.out.println(node.compareValues(dis));
+        assertEquals(1, node.compareValues(dis));
+    }
 }
