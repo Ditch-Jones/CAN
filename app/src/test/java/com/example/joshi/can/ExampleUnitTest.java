@@ -27,10 +27,10 @@ public class ExampleUnitTest {
     {
         Node node = new Node();
         try {
-            Corner bottomLeftCorner = new Corner(0.3, 0.1);
-            Corner bottomRightCorner= new Corner(0.6, 0.1);
-            Corner topLeftCorner    = new Corner(0.3, 0.9);
-            Corner topRightCorner   = new Corner(0.6, 0.9);
+            Corner bottomLeftCorner = new Corner(0.0, 0.0);
+            Corner bottomRightCorner= new Corner(1.0, 0.0);
+            Corner topLeftCorner    = new Corner(0.0, 1.0);
+            Corner topRightCorner   = new Corner(1.0, 1.0);
             node.setBottomLeftCorner(bottomLeftCorner);
             node.setBottomRightCorner(bottomRightCorner);
             node.setTopLeftCorner(topLeftCorner);
