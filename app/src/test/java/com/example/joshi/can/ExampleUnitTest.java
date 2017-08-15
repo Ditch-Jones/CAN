@@ -1,5 +1,5 @@
 package com.example.joshi.can;
-
+// Ein Kommentar
 import com.example.joshi.can.Exception.XMustBeLargerThanZeroException;
 import com.example.joshi.can.Exception.YMustBeLargerThanZeroException;
 import com.example.joshi.can.Logic.Corner;
