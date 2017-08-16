@@ -228,6 +228,10 @@ public class Node {
         return index;
     }
 
+    public void requestJoin_for_GUI()
+    {
+        requestJoin();
+    }
 
     /**
      * Mit dieser Methode findet ein neuer Knoten einen Einstiegspunkt in das CAN, indem er den Bootstrapserver nach einer IP anfragt

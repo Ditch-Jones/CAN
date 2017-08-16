@@ -7,19 +7,27 @@ import com.example.joshi.can.Logic.Node;
  */
 
 public class Schnittstelle_GUI {
-    Node node;
+    Node node = new Node();
     public static void main (String args[])
     {
 
     }
 
     /**
-     * Der Aufruf für die GUI
+     * Der Aufruf um den Platz des Bildes in CAN zu finden für die GUI
      */
-    public void placePicInCan()
+    public void placePicInCan_for_GUI(String ip, double x, double y, int fotoid)
     {
-        node = new Node();
-        node.
-
+        node.placePicInCan(ip,x,y,fotoid);
     }
+
+    /**
+     * Der Aufruf für den Verbindungsaufbau bei der GUI
+     */
+    public void requestJoin_for_GUI()
+    {
+        node.requestJoin_for_GUI();
+    }
+
+
 }
