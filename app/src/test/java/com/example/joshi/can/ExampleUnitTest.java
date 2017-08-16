@@ -153,7 +153,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void receiveServer() throws IOException {
+    public void receivingServer() throws IOException {
         try{
             ServerSocket ss = new ServerSocket(9999);
 
