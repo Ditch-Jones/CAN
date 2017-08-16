@@ -33,6 +33,9 @@ public class Client {
         }
     }
 
+    private void start(){
+
+    }
     /**
      * Hilfsmethode um einen Double Wert in einen String zu casten
      * @param wert = Double Wert

@@ -9,9 +9,12 @@ public class Server {
 
 
     public static void main (String [] args) throws Exception{
+        Server server = new Server();
+        server.start();
 
+    }
 
-
+    public void start() {
         try{
             System.out.println("Server is started");
             ServerSocket ss = new ServerSocket(9999);
@@ -41,7 +44,6 @@ public class Server {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     /**
