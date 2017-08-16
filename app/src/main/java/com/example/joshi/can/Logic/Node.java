@@ -178,6 +178,17 @@ public class Node {
     }
 
     /**
+     * Diese Methode wird aufgerufen wenn ein neues Bild geschossen wurde und in CAN eingefügt werden soll
+     * @param ip IP des Besitzers
+     * @param x
+     * @param y
+     * @param fotoId
+     */
+    
+    public void placePicInCan(String ip, double x, double y, int fotoId){
+         receiveRoutingRequest(ip, x, y, fotoId, false);
+    }
+    /**
      * Diese Methode berechnet die Distanz zwischen den zu Routenden Knoten und den Neighbours des aktuellen Knotens(der routet)
      * @param x Des zu routenden Knoten
      * @param y Des zu routenden Knoten
