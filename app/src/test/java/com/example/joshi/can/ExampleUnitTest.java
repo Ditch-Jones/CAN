@@ -62,7 +62,7 @@ public class ExampleUnitTest {
         System.out.print("IP: 12.191.10.255 = " +node.hashX("12.191.10.255") + ", " + node.hashY("12.191.10.255") + "\n");
         System.out.print("IP: 12.191.11.255 = " +node.hashX("12.191.11.255") + ", " + node.hashY("12.191.11.255") + "\n");
         System.out.print("IP: 12.191.12.255 = " +node.hashX("12.191.12.255") + ", " + node.hashY("12.191.12.255") + "\n");
-        System.out.print("IP: 12.191.13.255 = " +node.hashX("12.191.13.255") + ", " + node.hashY("12.191.13.255") + "\n");
+        System.out.print("IP: 12.255.255.255 = " +node.hashX("12.191.13.255") + ", " + node.hashY("12.191.13.255") + "\n");
 
         assertEquals(true, node.checkIfInMyZone(node.hashX("192.111.23.4"), node.hashY("192.111.23.4")));
         assertEquals(true, node.checkIfInMyZone(node.hashX("180.1.23.123"), node.hashY("180.1.23.123")));
@@ -153,7 +153,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void receiveServer() throws IOException {
+    public void receivingServer() throws IOException {
         try{
             ServerSocket ss = new ServerSocket(9999);
 
@@ -169,7 +169,6 @@ public class ExampleUnitTest {
         }
 
     }
-
 
 
 }

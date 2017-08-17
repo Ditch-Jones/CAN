@@ -13,9 +13,10 @@ public class Client extends Thread {
     /**
      * Main Methode zum Testen der einzelnen Methoden
      *
-     * Uebergabe-Werte bitte hier in Konstruktoren geben
+     * Uebergabe-Werte bitte in der sendAll Methode
+     *
+     * sendAll(String, String, double, double, int)
      */
-
     protected static final int portNr = 9999;
 
     public static void main (String args[])throws NoSuchElementException{
@@ -27,8 +28,13 @@ public class Client extends Thread {
         Client client = new Client();
 
         try{
+<<<<<<< HEAD
             client.sendIPAddress("10.234.201.158", "Dooooo Hont!");
             // client.sendXCoordinate("192.168.2.110", 0.213);
+=======
+
+            client.sendAll("localhost", "Routing-Request", 0.31, 0.78, 9);
+>>>>>>> 521357607f2116657b79405073a6f04716439b6a
 
         }catch (UnknownHostException e){
             e.printStackTrace();
@@ -36,6 +42,81 @@ public class Client extends Thread {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
+=======
+
+    private void start(){
+
+    }
+    /**
+     * Hilfsmethode um einen Double Wert in einen String zu casten
+     * @param wert = Double Wert
+     * @return Double als String
+     */
+    private String convertDoubleToString(double wert){
+        String newString = Double.toString(wert);
+        return newString;
+    }
+
+
+    private void sendAll(String ip,String method, double x, double y, int schlahmichtot) throws IOException{
+        Socket s = new Socket(ip, portNr);
+
+        sendMethod(s, method);
+        sendX(s, x);
+        sendY(s,y);
+        sendInt(s, schlahmichtot);
+        s.close();
+    }
+
+    private void sendMethod(Socket s, String method) throws UnknownHostException, IOException{
+
+        OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
+        PrintWriter out = new PrintWriter(osw);
+        out.write(method + ",");
+        osw.flush();
+
+    }
+
+
+    private void sendX(Socket s, double wert) throws UnknownHostException, IOException{
+
+        OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
+        PrintWriter out = new PrintWriter(osw);
+        String wertAlsString = convertDoubleToString(wert);
+        out.write(wertAlsString + "X");
+        osw.flush();
+
+    }
+
+    private void sendY(Socket s, double wert) throws UnknownHostException, IOException{
+
+        OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
+        PrintWriter out = new PrintWriter(osw);
+        String wertAlsString = convertDoubleToString(wert);
+        out.write(wertAlsString + "Y");
+        osw.flush();
+
+    }
+
+    private void sendInt(Socket s, int wert) throws UnknownHostException, IOException{
+
+        OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
+        PrintWriter out = new PrintWriter(osw);
+        String wertAlsString = Integer.toString(wert);
+        out.write(wertAlsString + "I");
+        osw.flush();
+
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //////////////////////Wird vorerst nicht verwendet!/////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+>>>>>>> 521357607f2116657b79405073a6f04716439b6a
     /**
      * Methode zum Senden einer IP-Adresse als String
      *
@@ -46,6 +127,7 @@ public class Client extends Thread {
      * @throws IOException
      */
 
+    @SuppressWarnings("unused")
     private void sendIPAddress(String ip, String ipAdr) throws UnknownHostException, IOException{
 
         Socket s = new Socket(ip, portNr);
@@ -69,6 +151,7 @@ public class Client extends Thread {
      * @throws IOException
      */
 
+    @SuppressWarnings("unused")
     private void sendXCoordinate(String ip, double x) throws UnknownHostException, IOException{
 
         Socket s = new Socket(ip, portNr);
@@ -79,9 +162,5 @@ public class Client extends Thread {
         osw.flush();
         s.close();
 
-    }
-
-    public void sendString(String ip, String ipAdr) throws IOException {
-        sendIPAddress(ip,ipAdr);
     }
 }

@@ -124,7 +124,7 @@ public class Node {
             if(isNode){
                 //// TODO: 14.08.2017  Reply to Request-Method(muss setPeers(mit sich selbst) und setNeighbours mitsenden)
                 //// TODO: 14.08.2017 Muss aktuelle Peers über den neuen Knoten Informieren, sodass diese ihre Peerliste updaten. Nun update deine eigene Peerlist
-                if(getPeersCount() == maxPeers){
+                if(checkIfMaxPeersCount()){
                     //// TODO: 15.08.2017 informiere deine Peers das sie nun Splitten müssen// methode die einen Splitt aufruft
                     //// TODO: 14.08.2017 SPLITT
                 }
@@ -178,6 +178,16 @@ public class Node {
     }
 
     /**
+     * Diese Methode wird aufgerufen wenn ein neues Bild geschossen wurde und in CAN eingefügt werden soll
+     * @param ip IP des Besitzers
+     * @param x
+     * @param y
+     * @param fotoId
+     */
+    public void placePicInCan(String ip, double x, double y, int fotoId){
+         receiveRoutingRequest(ip, x, y, fotoId, false);
+    }
+    /**
      * Diese Methode berechnet die Distanz zwischen den zu Routenden Knoten und den Neighbours des aktuellen Knotens(der routet)
      * @param x Des zu routenden Knoten
      * @param y Des zu routenden Knoten
@@ -217,12 +227,16 @@ public class Node {
         return index;
     }
 
+    public void requestJoin_for_GUI()
+    {
+        requestJoin();
+    }
 
     /**
      * Mit dieser Methode findet ein neuer Knoten einen Einstiegspunkt in das CAN, indem er den Bootstrapserver nach einer IP anfragt
      */
     private void requestJoin(){
-        //// TODO: 15.08.2017 getBootsTrapIP() Method
+        //// TODO: 15.08.2017 getBootsTrapIP() Methode
         //// TODO: 15.08.2017 nun Verbindung zu dieser IP herstellen und routing-Anfrage mit(eigener IP und x ,y Werten, id und isNode als Parameter)
     }
 
@@ -252,7 +266,7 @@ public class Node {
 
     // TODO: 15.08.2017 Vielleicht so implementieren das hier auch noch gecheckt wird ob gesplittet wird 
     private boolean checkIfMaxPeersCount(){
-        if (peersCount == maxPeers){
+        if (getPeersCount() == maxPeers){
             return true;
         }else{
             return false;
