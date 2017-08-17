@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
 
 
-public class Client {
+public class Client extends Thread {
 
     /**
      * Main Methode zum Testen der einzelnen Methoden
@@ -19,10 +19,15 @@ public class Client {
     protected static final int portNr = 9999;
 
     public static void main (String args[])throws NoSuchElementException{
+       Client client = new Client();
+        client.run();
+    }
+
+    public void run(){
         Client client = new Client();
 
         try{
-            client.sendIPAddress("192.168.2.110", "Dooooo Hont!");
+            client.sendIPAddress("10.234.201.158", "Dooooo Hont!");
             // client.sendXCoordinate("192.168.2.110", 0.213);
 
         }catch (UnknownHostException e){
@@ -31,7 +36,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
     /**
      * Methode zum Senden einer IP-Adresse als String
      *
