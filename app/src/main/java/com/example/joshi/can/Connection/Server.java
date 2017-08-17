@@ -89,7 +89,7 @@ public class Server {
 
         int indexOfKomma = longterm.indexOf('N');
         indexOfKomma += 1;
-        int indexOfX = longterm.indexOf('X');
+        int indexOfX = longterm.indexOf('x');
 
 
         String x = longterm.substring(indexOfKomma, indexOfX);
@@ -114,7 +114,7 @@ public class Server {
 
     private static double returnYCoordinate(String longterm) {
 
-        int indexOfKomma = longterm.indexOf('X');
+        int indexOfKomma = longterm.indexOf('x');
         indexOfKomma += 1;
         int indexOfY = longterm.indexOf('Y');
 

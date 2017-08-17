@@ -85,7 +85,7 @@ public class Client {
         OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
         PrintWriter out = new PrintWriter(osw);
         String wertAlsString = convertDoubleToString(wert);
-        out.write(wertAlsString + "X");
+        out.write(wertAlsString + "x");
         osw.flush();
 
     }
