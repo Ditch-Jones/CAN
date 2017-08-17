@@ -1,6 +1,7 @@
 package com.example.joshi.can;
 
 import com.example.joshi.can.Connection.Client;
+import com.example.joshi.can.Connection.Server;
 import com.example.joshi.can.Exception.XMustBeLargerThanZeroException;
 import com.example.joshi.can.Exception.YMustBeLargerThanZeroException;
 import com.example.joshi.can.Logic.Corner;
@@ -143,7 +144,7 @@ public class ExampleUnitTest {
     public void testSendIPAddress() throws IOException {
         Client client = new Client();
         try{
-            client.sendString("127.0.0.1","192.168.9.119");
+            client.sendeAlles("127.0.0.1","hashX","192.101.101.1",0.3,0.88766,2);
 
         }catch(UnknownHostException e){
             e.printStackTrace();
@@ -154,19 +155,8 @@ public class ExampleUnitTest {
 
     @Test
     public void receivingServer() throws IOException {
-        try{
-            ServerSocket ss = new ServerSocket(9999);
-
-            Socket s = ss.accept();
-            BufferedReader br = new BufferedReader (new InputStreamReader(s.getInputStream()));
-            String str = br.readLine();
-
-            System.out.println("Client Data: " + str);
-
-            ss.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        Server server = new Server();
+        server.start();
 
     }
 

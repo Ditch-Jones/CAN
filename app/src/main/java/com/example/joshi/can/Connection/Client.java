@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
 
 
-public class Client extends Thread {
+public class Client {
 
     /**
      * Main Methode zum Testen der einzelnen Methoden
@@ -20,21 +20,11 @@ public class Client extends Thread {
     protected static final int portNr = 9999;
 
     public static void main (String args[])throws NoSuchElementException{
-       Client client = new Client();
-        client.run();
-    }
-
-    public void run(){
         Client client = new Client();
 
         try{
-<<<<<<< HEAD
-            client.sendIPAddress("10.234.201.158", "Dooooo Hont!");
-            // client.sendXCoordinate("192.168.2.110", 0.213);
-=======
 
-            client.sendAll("localhost", "Routing-Request", 0.31, 0.78, 9);
->>>>>>> 521357607f2116657b79405073a6f04716439b6a
+            client.sendAll("localhost","Routing-Request","192.101.101.1" ,0.31, 0.78, 9);
 
         }catch (UnknownHostException e){
             e.printStackTrace();
@@ -42,12 +32,8 @@ public class Client extends Thread {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
 
-    private void start(){
 
-    }
     /**
      * Hilfsmethode um einen Double Wert in einen String zu casten
      * @param wert = Double Wert
@@ -59,14 +45,21 @@ public class Client extends Thread {
     }
 
 
-    private void sendAll(String ip,String method, double x, double y, int schlahmichtot) throws IOException{
+    private void sendAll(String ip,String method, String newIP, double x, double y, int schlahmichtot) throws IOException{
         Socket s = new Socket(ip, portNr);
 
         sendMethod(s, method);
+        sendNewIP(s, newIP);
         sendX(s, x);
         sendY(s,y);
         sendInt(s, schlahmichtot);
         s.close();
+    }
+
+
+    public void sendeAlles(String ip,String method, String newIP, double x, double y, int schlahmichtot) throws IOException {
+        Client client = new Client();
+        client.sendAll(ip,method, newIP,x,y, schlahmichtot);
     }
 
     private void sendMethod(Socket s, String method) throws UnknownHostException, IOException{
@@ -74,6 +67,14 @@ public class Client extends Thread {
         OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
         PrintWriter out = new PrintWriter(osw);
         out.write(method + ",");
+        osw.flush();
+
+    }
+
+    private void sendNewIP(Socket s, String newIP) throws IOException {
+        OutputStreamWriter osw = new OutputStreamWriter(s.getOutputStream());
+        PrintWriter out = new PrintWriter(osw);
+        out.write(newIP + "N");
         osw.flush();
 
     }
@@ -116,7 +117,6 @@ public class Client extends Thread {
     ///////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
 
->>>>>>> 521357607f2116657b79405073a6f04716439b6a
     /**
      * Methode zum Senden einer IP-Adresse als String
      *
