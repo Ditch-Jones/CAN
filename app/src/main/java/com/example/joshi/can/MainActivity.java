@@ -8,13 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joshi.can.Connection.Client;
 import com.example.joshi.can.Connection.Server;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
 
+public class MainActivity extends AppCompatActivity {
+    TextView info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +32,22 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        setContentView(R.layout.activity_main);
         Server server = new Server();
         server.start();
+        try {
+            wait(10000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Client client = new Client();
-
+        try {
+            client.sendeAlles("127.0.0.1","hashX","192.101.101.1",0.3,0.88766,2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        info = (TextView)findViewById(R.id.info);
+        info.setText(server.getMethodName());
 
 
     }

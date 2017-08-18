@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-
+    String methodName;
 
     public static void main(String[] args) throws Exception {
         Server server = new Server();
@@ -33,7 +33,7 @@ public class Server {
             System.out.println("Client Data: " + str);
 
             ss.close();
-            String methodName = returnMethodName(str);
+            methodName = returnMethodName(str);
             switch(methodName){
                 case "requestJoin": System.out.println("in RequestJoin\n");
                                     break;
@@ -150,5 +150,9 @@ public class Server {
     private static double beweis(double wert) {
         wert += 0.25;
         return wert;
+    }
+
+    public String getMethodName(){
+        return methodName;
     }
 }
