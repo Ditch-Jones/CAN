@@ -1,5 +1,7 @@
 package com.example.joshi.can.Connection;
 
+import android.util.Log;
+
 import com.example.joshi.can.Logic.Node;
 
 import java.io.BufferedReader;
@@ -7,20 +9,21 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Server extends Thread {
     String methodName;
 
     public static void main(String[] args) throws Exception {
         Server server = new Server();
-        server.start();
+        server.run();
 
     }
 
-    public void start() {
+    @Override
+    public void run() {
         try {
             Node node = new Node();
             System.out.println("Server is started");
-            ServerSocket ss = new ServerSocket(9999);
+            ServerSocket ss = new ServerSocket(8080);
 
             System.out.println("Server is waiting for request");
             Socket s = ss.accept();

@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +16,22 @@ import com.example.joshi.can.Connection.Client;
 import com.example.joshi.can.Connection.Server;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 public class MainActivity extends AppCompatActivity {
-    TextView info;
+    Button startServer,startClient;
+    TextView info,msg;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,25 +46,62 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         setContentView(R.layout.activity_main);
+
+        startServer = (Button)findViewById(R.id.Start_Server);
+        startClient = (Button)findViewById(R.id.Starte_Client);
+
+        startServer.setOnClickListener(
+                new Button.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        Thread socketServerThread = new Thread(new Server());
+                        socketServerThread.start();
+
+                    }
+                }
+        );
+
+        startClient.setOnClickListener(
+                new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Thread socketClient = new Thread(new Client());
+                        socketClient.start();
+                    }
+                }
+
+        );
+
+    }
+
+
+    /*
+    @Override
+    protected void onStart() {
+        super.onStart();
         Server server = new Server();
         server.start();
-        try {
-            wait(10000l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+
+
         Client client = new Client();
+
         try {
             client.sendeAlles("127.0.0.1","hashX","192.101.101.1",0.3,0.88766,2);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         info = (TextView)findViewById(R.id.info);
         info.setText(server.getMethodName());
 
-
     }
+    */
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

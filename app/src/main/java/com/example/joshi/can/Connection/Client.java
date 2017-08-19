@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
 
 
-public class Client {
+public class Client extends Thread {
 
     /**
      * Main Methode zum Testen der einzelnen Methoden
@@ -17,22 +17,28 @@ public class Client {
      *
      * sendAll(String, String, double, double, int)
      */
-    protected static final int portNr = 9999;
+    protected static final int portNr = 8080;
 
     public static void main (String args[])throws NoSuchElementException{
+        Client client = new Client();
+        client.run();
+    }
+
+    @Override
+    public void run() {
         Client client = new Client();
 
         try{
 
-            client.sendAll("localhost","Routing-Request","192.101.101.1" ,0.31, 0.78, 9);
+            client.sendAll("localhost","hashX","192.101.101.1" ,0.31, 0.78, 9);
 
         }catch (UnknownHostException e){
             e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
 
+    }
 
     /**
      * Hilfsmethode um einen Double Wert in einen String zu casten
@@ -47,7 +53,7 @@ public class Client {
 
     private void sendAll(String ip,String method, String newIP, double x, double y, int schlahmichtot) throws IOException{
         Socket s = new Socket(ip, portNr);
-
+        System.out.println("wird gesendet");
         sendMethod(s, method);
         sendNewIP(s, newIP);
         sendX(s, x);
