@@ -161,4 +161,58 @@ public class ExampleUnitTest {
     }
 
 
+    @Test
+    public void test_hash() {
+
+        class hashf {
+            public void start(String ip) {
+                double x = Math.random();
+                double y = Math.random();
+
+                System.out.println("IP: " + ip);
+                System.out.println("X = " + x + " und Y = " + y);
+                //System.out.println(x);
+            }
+
+            /*private double hashX(String str) {
+                double i = 0;
+                for (int j = 0; j < str.length(); j++) {
+                    i += str.charAt(j) % 64+ j + (i/48);
+
+                }
+                return i / 1000;
+            }
+
+            private double hashY(String str) {
+                double i = 0;
+                for (int j = 0; j < str.length(); j++) {
+                    i += str.charAt(j) % 32 + j + (i/8);
+
+                }
+                return i / 1000;
+            }
+
+
+            private String umkehren( String ip )
+            {
+                String umgekehrt = new String();
+
+                for ( int j = ip.length()-1; j >= 0; j-- )
+                    umgekehrt += ip.charAt(j);
+
+                return umgekehrt;
+            }*/
+
+        }
+
+
+        hashf h = new hashf();
+        h.start("2.3.5.6");
+        h.start("245.52.63.86");
+        h.start("5.36.32.72");
+        h.start("37.83.96.255");
+        h.start("2.3.1.4");
+        h.start("255.255.255.255");
+        h.start("0.0.0.0");
+    }
 }
