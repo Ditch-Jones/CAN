@@ -1,6 +1,4 @@
-package can;
-
-import javafx.util.Pair;
+package com.example.joshi.can.Logic;
 
 /**
  * Created by gyorgyi on 22/08/17.
@@ -90,32 +88,32 @@ public class Zone {
      *
      * @return the new pair of zones created by splitting this zone
      */
-    public Pair<Zone,Zone> split() {
+    public void split(Node node1, Node node2, Node node3, Node node4) {
 
         // we split the zone along the longest side
-        if (getLengthX() > getLengthY()) {
+        if (getLengthX(node1) > getLengthY(node1)) {
 
-            double midX = x1 + getLengthX() / 2.0;
-            return new Pair<Zone, Zone>(new Zone(x1, midX, y1, y2), new Zone(midX, x2, y1, y2));
+            double midX = x1 + getLengthX(node1) / 2.0;
+            // set peers und neigbour und update Corner
 
         } else {
 
-            double midY = y1 + getLengthY() / 2.0;
-            return new Pair<>(new Zone(x1, x2, y1, midY), new Zone(x1, x2, midY, y2));
+            double midY = y1 + getLengthY(node1) / 2.0;
+            // set peers und neigbour und update Corner
         }
     }
 
     /**
      * Get the length of the Y side of the zone
      */
-    private double getLengthY() {
-        return y2 - y1;
+    private double getLengthY(Node node) {
+        return node.get - y1;
     }
 
     /**
      * Get the length of the X side of the zone
      */
-    private double getLengthX() {
+    private double getLengthX(Node node) {
         return x2 - x1;
     }
 
